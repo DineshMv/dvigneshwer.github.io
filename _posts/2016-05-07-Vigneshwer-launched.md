@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "My First Post :)"
+title: "My First Post"
 date: 2016-05-07
 ---
 
@@ -10,6 +10,6 @@ Neat thing about it - powered by [Jekyll](http://jekyllrb.com) and I can use Mar
 
 It actually is a lot easier than I thought it was going to be.
 
-Will be blogging about various projects and how to implement in the most easiest matter.
+Will be blogging about various projects and how to implement in the most easiest manner.
 
 Project Keywords : Sensors, Data Analytics, IOT, Realtime problem solving, Algorithms.
