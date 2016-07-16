@@ -39,9 +39,11 @@ Docker containers are not tied to any specific infrastructure: they run on any c
 <br><br>
 <h2>ADVANTAGES OF DOCKER</h2>
 <br><br>
+<p>
 <ul>
 <li>Accelerates development</li>
 <li>Eliminate environment inconsistency</li>
 <li>Deployment becomes easy</li>
 <li>Quickly scale</li>
 </ul>
+</p>
