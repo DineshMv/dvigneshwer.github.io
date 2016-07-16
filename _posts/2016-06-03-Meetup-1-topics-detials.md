@@ -22,3 +22,25 @@ Basic commnads : <a href="https://www-xray.ast.cam.ac.uk/~jss/lecture/computing/
 Writing Scripts :<a href="http://www.panix.com/~elflord/unix/bash-tute.html">http://www.panix.com/~elflord/unix/bash-tute.html </a>
 <br><br>
 </p>
+
+<h2>DOCKER </h2>
+<br><br>
+<p>
+Docker is the world's leading software containerization platform.Docker containers wrap a piece of software in a complete filesystem that contains everything needed to run: code, runtime, system tools, system libraries
+</p>
+<br><br>
+
+CONTAINERS
+<br><br>
+<p>
+Containers include the application and all of its dependencies but share the kernel with other containers.Running as isolated processes in user space on the host operating system.<br>
+Docker containers are not tied to any specific infrastructure: they run on any computer, on any infrastructure, and in any cloud.
+</p>
+<h2>ADVANTAGES OF DOCKER</h2>
+<br><br>
+<ul>
+<li>Accelerates development</li>
+<li>Eliminate environment inconsistency</li>
+<li>Deployment becomes easy</li>
+<li>Quickly scale</li>
+</ul>
