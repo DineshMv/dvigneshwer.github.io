@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Introduction to Git"
+title: "Introduction to Git, shell scripting and Docker"
 date: 2016-06-3
 ---
 <h2>Introduciton to GIT</h2>
@@ -30,12 +30,13 @@ Docker is the world's leading software containerization platform.Docker containe
 </p>
 <br><br>
 
-CONTAINERS
+<h2>CONTAINERS</h2>
 <br><br>
 <p>
 Containers include the application and all of its dependencies but share the kernel with other containers.Running as isolated processes in user space on the host operating system.<br>
 Docker containers are not tied to any specific infrastructure: they run on any computer, on any infrastructure, and in any cloud.
 </p>
+<br><br>
 <h2>ADVANTAGES OF DOCKER</h2>
 <br><br>
 <ul>
