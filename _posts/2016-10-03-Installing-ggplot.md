@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Installing GG plot"
-date: 2016-05-11
+date: 2016-10-02
 ---
 
 # Tutorial for installing ggplot
-
-* ggplot is a python module which helps in visualizing of plots etc
+ 
+ggplot is a python module which helps in visualizing of plots etc
 
 ~~~~
 pip install ggplot
