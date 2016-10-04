@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "NodeJs : End to end guide"
+title: "NodeJs : Intro"
 date: 2016-08-13
 ---
 
@@ -10,21 +10,24 @@ All APIs of Node.js library are asynchronous that is, non-blocking. It essential
 
 Node.js uses a single threaded model with event looping.
 
-Installation:
-<strong>
+## Installation:
+
+~~~~
 sudo apt-get install nodejs
 
 Add /usr/local/nodejs/bin to the PATH environment variable.
 
 export PATH=$PATH:/usr/local/nodejs/bin
-</strong>
-Check:
+~~~~
 
+Check:
+~~~~
 nano main.js
 
 console.log("Hello world")
 
 node main.js
+~~~~
 
 If all goes good, then you should see Hello world in the terminal
 
@@ -35,7 +38,8 @@ Import required modules − We use require directive to load a Node.js module.
 Create server − A server which will listen to client's request similar to Apache HTTP Server.
 
 Read request and return response − server created in earlier step will read HTTP request made by client which can be a browser or console and return the response.
-<strong>
+
+~~~~
 var http = require("http");
 
 http.createServer(function (request, response) {
@@ -51,12 +55,13 @@ http.createServer(function (request, response) {
 
 // Console will print the message
 console.log('Server running at http://127.0.0.1:5000/')
-</strong>
+~~~~
 
 saves this in to server.js and run node server.js, open your browser and type 127.0.0.1:5000, you should see Hello World yipee you have stup your http server
 
 Node Package Manager (npm) helps you install node modules
-<strong>
+
+~~~~
 npm -version
 sudo npm install npm -g // to upgrage
 
@@ -71,10 +76,6 @@ npm install express -g // installs in the usr/lib/node-modules location
 npm uninstall package_name
 
 npm search module_name
-</strong>
+~~~~
+
 Above are few npm commands
-
-
-
-
-
