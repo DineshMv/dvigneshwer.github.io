@@ -27,7 +27,7 @@ apt-get install python3-tk
 if you are checking via ipython, make sure import mathplotlib
 
 ~~~~
-import mathplotlib
+import matplotlib
 
 mathplotlib.use('Agg')
 
