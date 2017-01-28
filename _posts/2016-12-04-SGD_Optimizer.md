@@ -1,8 +1,10 @@
 ---
 layout: post
-title: "SGD Optimizer"
+title: "Deep drive into SGD Optimizer"
 date: 2016-12-04
 ---
+
+## Introduction to gradient descent
 
 Okay so generally in machine learning you have some training data on which you are supposed to build a model so as to predict or classify some properties learned from the dataset.
 
@@ -26,6 +28,18 @@ Gradient descent basically decreases or increases the values of the parameters o
 
 So the gradient descent uses a **learning rate (alpha)** which basically is a multiplier which lets you reach the local min faster. Selection of a smaller value will lead to local minimum slower or a higher value will lead to oscillation of the final cost functions.
 
-Enough talking now PFB the **mathematical derivations**(TBC..)
+## Main Formulas
 
+Below are the list of formulas which is developed in the DeepRust project.
 
+**Mathematical derivations**
+
+The below derivations are how we arive at the mathematical formulas above.
+
+Ref:
+* [Derivation](http://math.stackexchange.com/questions/70728/partial-derivative-in-gradient-descent-for-two-variables)
+
+## Stochastic gradient descent (TBC ..)
+
+Ref:
+* [Difference between SGD and GD](https://www.quora.com/Whats-the-difference-between-gradient-descent-and-stochastic-gradient-descent)
