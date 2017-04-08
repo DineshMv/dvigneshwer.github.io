@@ -1,10 +1,15 @@
 ---
-layout: post
-title: "Deep drive into SGD Optimizer"
+title: 'Deep drive into SGD Optimizer'
 date: 2016-12-04
+permalink: /posts/2016/04/SGD-intro/
+tags:
+  - AI Unit
+  - Mathematics
+  - DeepRust
 ---
 
-## Introduction to gradient descent
+Introduction to gradient descent
+================================
 
 Okay so generally in machine learning you have some training dataset on which you are supposed to build a model so as to predict or classify some properties learned from the dataset.
 
@@ -22,19 +27,20 @@ Gradient descent basically decreases or increases the values of the parameters o
 
 > Selection of a smaller value will lead to local minimum slower or a higher value will lead to oscillation of the final cost functions.
 
-## Main Formulas
+Main Formulas
+=============
 
 Below are the list of formulas which is developed in the DeepRust project.
 
-![SGD Formula](/assets/sgd_formula.png)
+![SGD Formula](/images/sgd_formula.png)
 
 **Mathematical derivations**
 
 The below derivations are how we arive at the mathematical formulas above.
 
-![SGD der](/assets/sgd_der1.png)
-![SGD der](/assets/sgd_der2.png)
-![SGD der](/assets/sgd_der3.png)
+![SGD der](/images/sgd_der1.png)
+![SGD der](/images/sgd_der2.png)
+![SGD der](/images/sgd_der3.png)
 
 Ref:
 * [Derivation](http://math.stackexchange.com/questions/70728/partial-derivative-in-gradient-descent-for-two-variables)
