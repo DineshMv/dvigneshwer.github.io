@@ -3,7 +3,7 @@ title: "Rust CookBook"
 collection: publications
 permalink: /publication/Rust-CookBook
 excerpt: 'This book will help you understand the core concepts of the Rust language, enabling you to develop efficient and high performance applications.'
-date: 20017-06-01
+date: 2017-06-01
 venue: 'Packt Publishers'
 paperurl: 'https://www.packtpub.com/application-development/rust-cookbook'
 citation: 'Vigneshwer Dhinakaran. (2017). &quot;Rust CookBook.&quot; <i>Packt Publisher</i>.'
