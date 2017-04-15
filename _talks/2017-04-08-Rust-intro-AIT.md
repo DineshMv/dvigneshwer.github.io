@@ -182,11 +182,250 @@ For Windows,
 Type System
 ===========
 
+* Sample hello world code
+
+~~~~
+fn main() {
+    println!("Hello, world!");
+}
+~~~~
+
+* Compiling and Running the code
+
+~~~~
+$ rustc main.rs
+$ ./main
+Hello, world!
+~~~~
+
+* AVG Function
+
+~~~~
+fn avg(list: &[f64]) -> f64 {
+    let mut total = 0;
+    for el in list{
+        total += *el
+    }    
+    total/list.len() as f64
+}
+~~~~
+
+* HLL version
+
+~~~~
+fn avg(list: &[f64]) -> f64 {
+    list.iter().sum::<f64>() / list.len() as f64
+}
+~~~~
+
+* Parallel Version (Rayon)
+
+~~~~
+fn avg(list: &[f64]) -> f64 {
+    list.par_iter().sum::<f64>() / list.len() as f64
+}
+~~~~
+
+* Fold 
+
+~~~~
+fn avg(list: &[f64]) -> f64 {
+    list.par_iter().fold(0., |a,b| a + b) / list.len() as f64
+}
+~~~~
+
+**Primitive Types**
+
+* bool
+
+~~~~
+let bool_val: bool = true;
+println!("Bool value is {}", bool_val);
+~~~~
+
+* char
+
+~~~~
+let x_char: char = 'a';
+ 
+// Printing the character
+println!("x char is {}", x_char);
+~~~~
+
+* i8/i16/i32/i64/isize
+
+~~~~
+let num =10;
+println!("Num is {}", num);
+
+let age: i32 =40;
+println!("Age is {}", age);
+println!("Max i32 {}",i32::MAX);
+println!("Max i32 {}",i32::MIN);
+~~~~
+
+* Tuples
+
+~~~~
+// Declaring a tuple
+let rand_tuple = ("Mozilla Science Lab", 2016);
+let rand_tuple2 : (&str, i8) = ("Viki",4);
+
+// tuple operations
+println!(" Name : {}", rand_tuple2.0);
+println!(" Lucky no : {}", rand_tuple2.1);
+~~~~
+
+* Arrays
+
+~~~~
+let rand_array = [1,2,3]; // Defining an array 
+
+println!("random array {:?}",rand_array );
+
+println!("random array 1st element {}",rand_array[0] ); // indexing starts with 0
+
+println!("random array length {}",rand_array.len() );
+
+println!("random array {:?}",&rand_array[1..3] ); // last two elements
+~~~~
+
+* String
+
+~~~~
+let rand_string = "I love Mozilla "; // declaring a random string
+
+println!("length of the string is {}",rand_string.len() ); // printing the length of the string
+
+let (first,second) = rand_string.split_at(7); // Splits in string
+
+let count = rand_string.chars().count();  // Count using iterator count
+~~~~
+
+**Complex Data Structures**
+
+* struct
+
+~~~~
+// define your custom user datatype
+struct Circle {
+    x : f64,
+    radius : f64,
+}
+~~~~
+
+* Rust “Class”
+
+~~~~
+impl Circle {
+    // pub makes this function public which makes it accessible outsite the scope {}
+    pub fn get_x(&self) -> f64 {
+    self.x
+    }
+}
+~~~~
+
+**Traits:**
+
+* Interfaces
+* Operator overloading
+* Indicators of behaviour
+* Bounds for generic
+* Dynamic dispatch
+
+~~~~
+// create a functionality for the datatypes 
+trait  HasArea {
+    fn area(&self) -> f64;
+}
+
+// implement area for circle
+impl HasArea for Circle {
+    fn area(&self) -> f64 {
+        3.14 * (self.r *self.r)
+    }
+}
+~~~~
 
 Ownership & Borrowing Concepts
 ==============================
 
+**Ownership**
 
+Example 1
+
+~~~~
+fn foo{
+    let v = vec![1,2,3];
+    let x = v;
+    println!(“{:?}”,v); // ERROR : use of moved value: “v”
+}
+~~~~
+
+Example 2
+
+~~~~
+fn print(v : Vec<u32>) {
+    println!(“{:?}”, v);
+}
+
+fn make_vec() {
+    let v = vec![1,2,3];
+    print(v);
+    print(v); // ERROR : use of moved value: “v” 
+}
+~~~~
+
+**Borrowing**
+
+If you have access to a value in Rust, you can lend out that access to the functions you call
+
+**Types of Borrowing**
+
+There is two type of borrowing in Rust, both the cases aliasing and mutation do not happen simultaneously
+
+* Shared Borrowing (&T)
+* Mutable Borrow (&mut T)
+
+**Mutable Borrow**
+
+~~~~
+fn  add_one(v: &mut Vec<u32> ) {
+    v.push(1)
+}
+
+fn foo() {
+    let mut v = Vec![1,2,3];
+    add_one(&mut v);
+}
+~~~~
+
+**Rules of Borrowing**
+
+* Mutable borrows are exclusive
+* Cannot outlive the object being borrowed
+* Cannot outlive the object being borrowed
+
+~~~~
+fn foo{
+    let mut v = vec![1,2,3];
+    let borrow1 = &v;
+    let borrow2 = &v;
+    add_one(&mut v): // ERROR : cannot borrow ‘v’ as mutuable because it is also borrowed as immutable
+}                                
+~~~~
+
+**Lifetimes**
+
+~~~~
+let outer;
+{
+let v = 1;
+outer = &v; 
+// ERROR: ‘v’ doesn’t live long
+}
+println!(“{}”, outer);
+~~~~
 
 Getting started with Rust Communities 
 =====================================
