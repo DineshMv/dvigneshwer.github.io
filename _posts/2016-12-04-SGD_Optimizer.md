@@ -46,10 +46,10 @@ Stochastic gradient descent
 ===========================
 Stochastic gradient descent is commonly reffered to as **SGD**, going ahead I will be using the short form only. The above method of gradient descent is called as Batch gradient descent, where the whole training data is given as the input to the network and back propagated well this works good for smaller dataset but while we scale up the model we face the following problems:
 
-** Computation Inability **
+* **Computation Inability**
 Its likely that you would be designing a model to solve a real world problem where there's amaple amount of data ans conditions and its not possible to load the complete data in the RAM of the hardware. The computation cost associated with running training on the complete data sets is not possible in real life scenarios as the datasets are huge.
 
-** Slow **
+* **Slow**
 Since we are running the training on the complete dataset in gradient descent, it is very slow as the backpropogation takes time.
 
 What SGD offers is that, it takes mini batches of data for training and updates the weight after back propogation of the first minibatch and so on. This ideas solves us a lot of problems about harware resources as mentioned below,
@@ -90,8 +90,8 @@ In the above equation **v** is the current velocity vector which is of the same 
 Code implementation
 ===================
 
-** Keras Implementation **
-
+**Keras Implementation**
+       
 * Create a file name sample_sgd.py
 
 * Copy paste the code below
@@ -138,3 +138,4 @@ Ref:
 * [Code - Tensorflow](https://www.tensorflow.org/api_docs/python/tf/train/Optimizer)
 * [SGD](http://ufldl.stanford.edu/tutorial/supervised/OptimizationStochasticGradientDescent/)
 
+ 
