@@ -98,33 +98,33 @@ Code implementation
 
 ~~~~
 
-# importing the keras Deeplearning library
+#importing the keras Deeplearning library
 from keras import optimizers
 
-# Creating a new object 
+#Creating a new object 
 model = Sequential()
 
-# Dense - Regular densely-connected NN layer
+#Dense - Regular densely-connected NN layer
 model.add(Dense(64, init='uniform', input_shape=(10,)))
 
-# Applying the other stacked layers
+#Applying the other stacked layers
 model.add(Activation('tanh'))
 model.add(Activation('softmax'))
 
-# Defined the SGD optimizer with a learning rate of 1e-16 and momentun of o.9
+#Defined the SGD optimizer with a learning rate of 1e-16 and momentun of o.9
 sgd = optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='mean_squared_error', optimizer=sgd)
 
-# x_train and y_train are Numpy arrays -- traning dataset
+#x_train and y_train are Numpy arrays -- traning dataset
 model.fit(x_train, y_train, epochs=5, batch_size=32)
 
-# or 
-model.train_on_batch(x_batch, y_batch)
+#or 
+#model.train_on_batch(x_batch, y_batch)
 
-# Evaluating metrics
+#Evaluating metrics
 loss_and_metrics = model.evaluate(x_test, y_test, batch_size=128)
 
-# Predic the class at realtime
+#Predic the class at realtime
 classes = model.predict(x_test, batch_size=128)
 
 ~~~~
