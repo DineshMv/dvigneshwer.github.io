@@ -1,6 +1,6 @@
 ---
 title: 'Binding python to Rust'
-date: 2016-12-04
+date: 2017-04-15
 permalink: /posts/2016/04/Rust-Python/
 tags:
   - Rust
