@@ -95,7 +95,9 @@ Code implementation
 * Create a file name sample_sgd.py
 
 * Copy paste the code below
+
 ~~~~
+
 # importing the keras Deeplearning library
 from keras import optimizers
 
@@ -124,9 +126,11 @@ loss_and_metrics = model.evaluate(x_test, y_test, batch_size=128)
 
 # Predic the class at realtime
 classes = model.predict(x_test, batch_size=128)
+
 ~~~~
 
 * For running,
+
 ~~~~
 python sample_sgd.py
 ~~~~
