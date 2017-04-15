@@ -8,6 +8,8 @@ tags:
   - DeepRust
 ---
 
+This post explains all the key concepts of optimization in Machine learning and deep dives into SGD along with mathematical derivation and code implementation of the same in Keras python module. 
+
 Introduction to gradient descent
 ================================
 
