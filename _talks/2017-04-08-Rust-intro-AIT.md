@@ -174,6 +174,19 @@ rustc --version
 cargo --version
 ~~~~
 
+Rust compiler comes with Cargo. Cargo is the package manager tool for Rust and its simply amazing it takes care of the following:
+
+* Creating a new project
+* Compilation and running Rust projects
+* Testing the new project
+* Downloading and installing dependencies
+* Version management of the dependecies
+* Pushing to crates.io - its the Rust community repository of open Rust crates/libraries
+* Benchmarking Rust units 
+* & more ... the list goes on
+
+Its one of the biggest selling point of Rust as its something very new in the system programming space and helps in going to production faster as it is designed according to the needs of the different processes involved in taking an application to solve real life problems.
+
 For Windows,
 
 * Go to https://win.rustup.rs/ .This will download rustup-init.exe
@@ -190,6 +203,10 @@ fn main() {
 }
 ~~~~
 
+Every programming language must start with hello world script, its like a rule when you are introducing programming languages (this is very debatable topic), but I am just following the crowd here.
+
+All the execution in Rust starts with the main function and here we use the **println!** macro to print the statement "hello world". Read more about [macros](https://doc.rust-lang.org/book/macros.html)
+
 * Compiling and Running the code
 
 ~~~~
@@ -197,6 +214,8 @@ $ rustc main.rs
 $ ./main
 Hello, world!
 ~~~~
+
+To compile and run the program, use the **rustc** compiler command line tool which has a lot of options.
 
 * AVG Function
 
@@ -209,6 +228,20 @@ fn avg(list: &[f64]) -> f64 {
     total/list.len() as f64
 }
 ~~~~
+
+Let's deep dive into something more complex, here we have an average function (**fn** keyword denotes the function ) which takes in an array argument of float type and names it **list** , it also returns **f64** type.  
+
+To create an variable in Rust we use the let keyword followed by the name of the entity for example:
+
+~~~~
+let rand_item = 10;
+~~~~
+
+This is the process of creating immutable variable, the value of the entity will not change through out its scope, but in the example above we have **total** variable which is suppose to be the cumulative sum of the iterations of the values of the array **list** when we run through each iterations in the for loop. 
+
+The **&** symbol in the function argument defination is something to note down as it actually called **reference** we will cover more about this in the borrowing section, but in the avg function we only have the privilege of only dereferencing the values of the differnt elements of the array. 
+
+Each type has various methods implemented for itself so here we the **list.len()** to find the total number of elements in the array and **as** help us with type casting of the result.
 
 * HLL version
 
