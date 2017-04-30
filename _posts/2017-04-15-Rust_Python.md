@@ -1,5 +1,5 @@
 ---
-title: 'Binding python to Rust'
+title: 'Creating python module in Rust'
 date: 2017-04-15
 permalink: /posts/2016/04/Rust-Python/
 tags:
@@ -7,12 +7,14 @@ tags:
   - Python
 ---
 
-The objective of the blog post is to implement the current state of binding python to Rust. The idea is to see whether rust turns out to be a great replacement for C/C++ whenever we go ahead looking for performance in python.
+The objective of the blog post is to implement a python module using the state of art programming language Rust. The idea is to create an python module in Rust.
+
+We will be using the rust-cpython project which makes it possible to execute Python code from Rust and vice-versa build a module in Rust for Python.
 
 Python module
 =============
 
-In this section lets create a simple python function, lets build a fibonacci sequence calculator. Follow the steps below to implement this code,
+In this section lets create a simple python function for example fibonacci sequence calculator. Follow the steps below to implement this code,
 
 * Create a file named sample_fib.py and copy paste the content below. 
 
@@ -71,38 +73,32 @@ The Cargo.toml should look something like this,
 
 ~~~~
 [package]
-name = "rust_python_example"
+name = "python-rust-example"
 version = "0.1.0"
-authors = []
+authors = ["Vigneshwer <daniele.esposti@gmail.com>"]
 
 [lib]
-name = "rust_python_example"
+name = "example"
 crate-type = ["dylib"]
 
-[dependencies]
-interpolate_idents = "*"
-
 [dependencies.cpython]
-version = "*"
+git = "https://github.com/dgrunwald/rust-cpython.git"
 default-features = false
-features = ["python3-sys"]
+features = ["python27-sys"]
+
 ~~~~
 
 * Go to ./src/lib.rs and edit the lib.rs file with the code below,
 
 ~~~~
-#![feature(plugin)]
-#![plugin(interpolate_idents)]
-
 #[macro_use] extern crate cpython;
 
-use cpython::{PyResult, Python, PyTuple, PyErr, exc, ToPyObject, PythonObject};
+use cpython::{PyString, Python, PyResult};
 
-mod fib {
-
-pub fn fib(n : u64) -> u64 {
+// 
+fn fibo(py: Python, n : u64) -> PyResult<u64> {
     if n < 2 {
-        return 1
+        return Ok(1)
     }
     let mut prev1 = 1;
     let mut prev2 = 1;
@@ -111,30 +107,34 @@ pub fn fib(n : u64) -> u64 {
         prev2 = prev1;
         prev1 = new;
     }
-    prev1 
-}
+    Ok(prev1) 
 }
 
-py_module_initializer!(librust_python_example, |_py, m| {
-    try!(m.add("__doc__", "Module documentation string"));
-    try!(m.add("fib", py_fn!(fib)));
+// To build a Python compatible module we need an intialiser which expose the public interface
+py_module_initializer!(example, initexample, PyInit_example, |py, m| {
+    // Expose our function fibo as `extern "C"`
+    try!(m.add(py, "fibo", py_fn!(py, fibo(rand_int: u64))));
+
+    // Initialiser s macro needs a Result<> as return value
     Ok(())
 });
 
-fn fib<'p>(py: Python<'p>, args: &PyTuple<'p>, kwargs: Option<&PyDict<'p>>) -> PyResult<'p, u64> {
-    let arg0 = match args.get_item(0).extract::<u64>() {
-        Ok(x) => x,
-        Err(_) => {
-            let msg = "Fib takes a number greater than 0";
-            let pyerr = PyErr::new_lazy_init(py.get_type::<exc::ValueError>(), Some(msg.to_py_object(py).into_object()));
-            return Err(pyerr);
-        }
-    };
-    Ok(fib::fib(arg0))
-}
 ~~~~
 
-TBC ..
+* Compile the project
+
+~~~~
+ cargo build --release
+~~~~
+
+* Use the project in Python
+
+~~~~
+cp ./target/release/lib_project_name.so ./rust_function.so
+
+import rust_function
+print(rust_function.fibo(4))
+~~~~
 
 Conclusion
 ==========
@@ -143,6 +143,8 @@ Rust is great language to build python module and has sea of oppurtunities in te
 
 **Ref:**
 
+* [rust-cpython](https://github.com/dgrunwald/rust-cpython)
+* [Python-rust binding](http://www.expobrain.net/2016/09/18/create-python-module-in-rust/)
 * [Teaching Rust to python programmer](http://lucumr.pocoo.org/2015/5/27/rust-for-pythonistas/)
 * [Python modules in Rust](http://ehiggs.github.io/2015/07/Python-Modules-In-Rust/)
 
