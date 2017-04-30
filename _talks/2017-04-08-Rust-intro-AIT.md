@@ -239,9 +239,11 @@ let rand_item = 10;
 
 This is the process of creating immutable variable, the value of the entity will not change through out its scope, but in the example above we have **total** variable which is suppose to be the cumulative sum of the iterations of the values of the array **list** when we run through each iterations in the for loop. 
 
-The **&** symbol in the function argument defination is something to note down as it actually called **reference** we will cover more about this in the borrowing section, but in the avg function we only have the privilege of only dereferencing the values of the differnt elements of the array. 
+The **&** symbol in the function argument defination is something to note down as it actually called **reference** we will cover more about this in the borrowing section, but in the avg function we have the privilege of dereferencing the values of the differnt elements of the array as the function has borrowed the ownership. 
 
-Each type has various methods implemented for itself so here we the **list.len()** to find the total number of elements in the array and **as** help us with type casting of the result.
+Each type in Rust has various methods implemented for itself so here we use the **list.len()** to find the total number of elements in the array and **as** keyowrd help us with type casting of the result.
+
+In the below code snippets we see other implementation of the same average function but in different ways.
 
 * HLL version
 
@@ -251,6 +253,25 @@ fn avg(list: &[f64]) -> f64 {
 }
 ~~~~
 
+The above code snippet to something simillar to what we would do in case of programming in a high level language for example take a look at the pythonic form of avg:
+
+~~~~
+def avg(rand_list):
+    return sum(rand_list)/len(rand_list)
+~~~~
+
+The avg function in Rust takes in a reference of an array of f64 elements and assigns it to the entity list and returns a value of type float before destructing it self. We have discussed about the **list.len()**  and **as** keyword in the above section. 
+
+Let's focus more on the **iter()** and **sum()** method here,
+
+**iter** is a method of the **std** trait which iterates over the reference **&T** and returns each item of the value of the entity till it reaches the last position and after which it returns **None**.  
+
+Read more about iter method and its variants [here](https://doc.rust-lang.org/std/iter/).
+
+**sum()** method adds each of the iterator elements and returns the sum when the None value is reached. We explicitly mention the type of the iterator as we have different implementation for different data types that is the reason we have **sum::<f64>()**.  
+
+Read more about Sum and its functionalities [here](https://doc.rust-lang.org/std/iter/trait.Sum.html#tymethod.sum).
+
 * Parallel Version (Rayon)
 
 ~~~~
@@ -258,6 +279,10 @@ fn avg(list: &[f64]) -> f64 {
     list.par_iter().sum::<f64>() / list.len() as f64
 }
 ~~~~
+
+We talk a lot about high performance in Rust let see how we actually achieve it, Rayon is an open source crate in Rust which provides us easy ways by which we can perform data parallelism for common operation in Rust. The only change from the previous implementation is that we change the iter to the par_iter() method and ofcourse you will have to call use import the rayon crate, par_iter is ideal for operation where you can converts your iteration operation to run parallel by chunking the data into smaller elements and run it in multiple thread, Rayon comes with the promise of freedom from data races like how Rust promises it uses the join() method in the backend to create multiple threads, rayon basically in an uber level provides you abstract api's which you can play with and do data parallelism to speed up your normal code. 
+
+Read more about rayon [here](https://github.com/nikomatsakis/rayon).
 
 * Fold 
 
@@ -267,7 +292,11 @@ fn avg(list: &[f64]) -> f64 {
 }
 ~~~~
 
+Everything is the same expect for the **fold()** method basically it is provided by the std library and it has accumulator which stores in all the value of the closure operations which in this case adds the value of input a and b, where a is the accumulator and b is the value from the iterator (**fold** is simillar to lambda x,y:x+y in python).
+
 **Primitive Types**
+
+Below are few standard data types which can be used while programming in Rust.
 
 * bool
 
@@ -275,6 +304,8 @@ fn avg(list: &[f64]) -> f64 {
 let bool_val: bool = true;
 println!("Bool value is {}", bool_val);
 ~~~~
+
+Ideal for flags and checking conditions.
 
 * char
 
@@ -284,6 +315,8 @@ let x_char: char = 'a';
 // Printing the character
 println!("x char is {}", x_char);
 ~~~~
+
+Printing statements etc.
 
 * i8/i16/i32/i64/isize
 
@@ -297,6 +330,8 @@ println!("Max i32 {}",i32::MAX);
 println!("Max i32 {}",i32::MIN);
 ~~~~
 
+For mathematical computations.
+
 * Tuples
 
 ~~~~
@@ -308,6 +343,8 @@ let rand_tuple2 : (&str, i8) = ("Viki",4);
 println!(" Name : {}", rand_tuple2.0);
 println!(" Lucky no : {}", rand_tuple2.1);
 ~~~~
+
+Like other tuples Rust allows you to combine multiple datatypes as tuples.
 
 * Arrays
 
@@ -321,6 +358,14 @@ println!("random array 1st element {}",rand_array[0] ); // indexing starts with 
 println!("random array length {}",rand_array.len() );
 
 println!("random array {:?}",&rand_array[1..3] ); // last two elements
+~~~~
+
+Arrays are static lists where you can store simillar types, where as vector are dynamic and you could use the push and pop method to add and remove elements from the vector. Rust creates a vector using the vec! macro in Rust. 
+
+~~~~
+let rand_vec = vec![1,2,3];
+vec.push(4);
+vec.pop();
 ~~~~
 
 * String
@@ -347,24 +392,40 @@ struct Circle {
 }
 ~~~~
 
+Real world application demand complex data structures and these are data structures which are build over the primitive data types and convey more information about the application specific type.
+
+struct is the keyword used in Rust to create the data type with the name of type following the keyword and the first letter is capital follwoing camel case here, In the above example we have **Circle** which basically has two field labels **x** and **radius** which are of type f64, while assigning values we follow the key:value for example:
+
+~~~~
+let mut rand_cirle = Circle { x: 1.2, radius: 2.0 };
+~~~~
+
 * Rust “Class”
 
 ~~~~
 impl Circle {
     // pub makes this function public which makes it accessible outsite the scope {}
     pub fn get_x(&self) -> f64 {
-    self.x
+        self.x
     }
 }
 ~~~~
 
-**Traits:**
+There are no class in Rust, but don't worry we can easily stimulate its behaviour using **struct** and **impl** functionalities. Here we have implementaion for the Circle type and the function **get_x** takes Circel as input and returns the value of **x** key by **self.x** 
+
+* Traits
+
+Traits are basically the language which tells the Rust compiler about the features the type must provide. 
+
+Traits are generally used for the following operations:
 
 * Interfaces
 * Operator overloading
 * Indicators of behaviour
 * Bounds for generic
 * Dynamic dispatch
+
+We first define a trait with a method signature, then implement the trait for a type. In the below example, we implement the trait HasArea for Circle:
 
 ~~~~
 // create a functionality for the datatypes 
@@ -380,10 +441,16 @@ impl HasArea for Circle {
 }
 ~~~~
 
+As you can see the trait does not have the funciton body and only has the type signature. 
+
 Ownership & Borrowing Concepts
 ==============================
 
 **Ownership**
+
+Ownership is concept that at a particular instance the variable will be binded to only a particular scope or has only one owner at a given instance of time.
+
+Most of the memory and concurrency bugs are due to bad memmory handling practise. 
 
 Example 1
 
@@ -394,6 +461,8 @@ fn foo{
     println!(“{:?}”,v); // ERROR : use of moved value: “v”
 }
 ~~~~
+
+In the above example the ownership of the values of vector v are moved to x, so v is no longer the owner of the vector values.
 
 Example 2
 
@@ -409,18 +478,24 @@ fn make_vec() {
 }
 ~~~~
 
+v cannot be printed twice as the ownership of v was passed to the print fucntion and after the operations v was destructed when the print function was completed.
+
 **Borrowing**
 
-If you have access to a value in Rust, you can lend out that access to the functions you call
+If you have access to a value in Rust, you can lend out that access to the functions you call.
 
 **Types of Borrowing**
 
-There is two type of borrowing in Rust, both the cases aliasing and mutation do not happen simultaneously
+There is two type of borrowing in Rust, both the cases we make sure aliasing and mutation do not happen simultaneously
 
 * Shared Borrowing (&T)
 * Mutable Borrow (&mut T)
 
+In all the above example in the talk we had used the shared borrowing technique where the function only has read access.
+
 **Mutable Borrow**
+
+The function add_one has the ability to make modification to the values of the vector and it return back the owner ship to the foo function.
 
 ~~~~
 fn  add_one(v: &mut Vec<u32> ) {
@@ -439,6 +514,8 @@ fn foo() {
 * Cannot outlive the object being borrowed
 * Cannot outlive the object being borrowed
 
+For example:
+
 ~~~~
 fn foo{
     let mut v = vec![1,2,3];
@@ -448,17 +525,21 @@ fn foo{
 }                                
 ~~~~
 
+Only one unit can have mutuable access to the enitiy while borrowing, all these rules help in avoiding the common system programming bugs.
+
 **Lifetimes**
 
 ~~~~
 let outer;
 {
-let v = 1;
-outer = &v; 
-// ERROR: ‘v’ doesn’t live long
+    let v = 1;
+    outer = &v; 
+    // ERROR: ‘v’ doesn’t live long
 }
 println!(“{}”, outer);
 ~~~~
+
+We will get an compilation error when we run this as the block (which are represented by the internal { .. }) is destructed when it reaches the end of the scope.
 
 Getting started with Rust Communities 
 =====================================
