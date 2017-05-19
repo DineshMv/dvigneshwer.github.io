@@ -63,6 +63,12 @@ cargo new rust_python_fib
 
 We are creating a library in Rust here.
 
+* Enter the new project created:
+
+~~~~
+cd rust_python_fib
+~~~~
+
 *  Edit the Cargo.toml file for downloading the cpython dependency.
 
 ~~~~
@@ -75,7 +81,7 @@ The Cargo.toml should look something like this,
 [package]
 name = "python-rust-example"
 version = "0.1.0"
-authors = ["Vigneshwer <daniele.esposti@gmail.com>"]
+authors = ["Vigneshwer <dvigneshwer@gmail.com>"]
 
 [lib]
 name = "example"
