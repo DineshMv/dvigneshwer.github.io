@@ -130,7 +130,7 @@ py_module_initializer!(example, initexample, PyInit_example, |py, m| {
 * Compile the project
 
 ~~~~
- cargo build --release
+cd .. && cargo build --release
 ~~~~
 
 * Use the project in Python
@@ -138,8 +138,9 @@ py_module_initializer!(example, initexample, PyInit_example, |py, m| {
 ~~~~
 cp ./target/release/lib_project_name.so ./rust_function.so
 
-import rust_function
-print(rust_function.fibo(4))
+python
+>>import rust_function
+>>print(rust_function.fibo(4))
 ~~~~
 
 Conclusion
