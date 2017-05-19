@@ -136,11 +136,11 @@ cd .. && cargo build --release
 * Use the project in Python
 
 ~~~~
-cp ./target/release/lib_project_name.so ./rust_function.so
+cp ./target/release/libexample.so ./example.so
 
 python
->>import rust_function
->>print(rust_function.fibo(4))
+>>import example
+>>print(example.fibo(4))
 ~~~~
 
 Conclusion
