@@ -242,6 +242,7 @@ Rust is great language to build python module and has sea of oppurtunities in te
 
 **Ref:**
 
+* [Source code](https://github.com/MozillaIndia/RustIndia/tree/master/RainOfRust/rust_python_fib)
 * [rust-cpython](https://github.com/dgrunwald/rust-cpython)
 * [Python-rust binding](http://www.expobrain.net/2016/09/18/create-python-module-in-rust/)
 * [Teaching Rust to python programmer](http://lucumr.pocoo.org/2015/5/27/rust-for-pythonistas/)
