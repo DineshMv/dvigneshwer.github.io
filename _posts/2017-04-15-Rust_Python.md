@@ -143,6 +143,98 @@ python
 >>print(example.fibo(4))
 ~~~~
 
+Benchmarking
+============
+
+Great if you have reached till here, we are almost done. Let's take a step further to benchmark the performance of the newly create Rust-python module.
+
+* Create a python file and open it in your favourite editor:
+
+~~~~
+touch bench_python.py && subl bench_python.py
+~~~~
+
+* Copy and paster the code snippet below in the python script
+
+~~~~
+#-- #########################
+#-- Task: Benchmarking experiments
+#-- Author: Vigneshwer.D
+#-- Version: 1.0.0
+#-- Date: 22 May 17
+#-- #########################
+
+# Importing modules
+import example
+
+# fibonacci implementation in Rust
+def rust_fibo(val):
+	return example.fibo(val)
+
+# fibonacci implementation in Python
+def py_fibo(n):
+  if n < 2:
+    return 1
+
+  prev1 = 1
+  prev2 = 1
+
+  for i in range(1, n):
+    next = prev1 + prev2
+    prev2 = prev1
+    prev1 = next
+    
+  return prev1
+
+val =50
+
+# benchmarking rust_fibo
+def test_rust_fibo(benchmark):
+	benchmark(rust_fibo, val)
+
+# benchmarking py_fibo
+def test_py_fibo(benchmark):
+	benchmark(py_fibo, val)
+
+
+if __name__ == '__main__':
+
+	# Series value
+	val =50
+
+	# Calling rust version
+	rust_val = rust_fibo(val)
+	print "Value predicted by rust_fibo: ", rust_val
+
+	# Calling python version
+	py_val = py_fibo(val)
+	print "Value predicted by py_fibo: ", py_val
+~~~~
+
+* To run the script: 
+
+~~~~
+python bench_python.py
+~~~~
+
+* To benchmark the performance:
+
+~~~~
+pytest bench_python.py
+~~~~
+
+Note:
+
+* To install the pytest framework:
+
+~~~~
+sudo pip install pytest-benchmark
+~~~~ 
+
+This should give you an output simillar to:   
+
+![benchmark results](https://github.com/MozillaIndia/RustIndia/blob/master/RainOfRust/images/rust_python_bench.png)
+
 Conclusion
 ==========
 
