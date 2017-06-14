@@ -512,7 +512,6 @@ fn foo() {
 
 * Mutable borrows are exclusive
 * Cannot outlive the object being borrowed
-* Cannot outlive the object being borrowed
 
 For example:
 
